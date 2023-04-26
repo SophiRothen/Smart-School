@@ -9,6 +9,8 @@ export class AlunosComponent implements OnInit {
 
   public titulo = 'Alunos';
 
+  public alunoSelecionado: string | undefined;
+
   public alunos = [
     {id: 1, nome: 'Marta', sobrenome: 'Kent', telefone: 332255},
     {id: 2, nome: 'Paula', sobrenome: 'Isabela', telefone: 3784835},
@@ -20,7 +22,13 @@ export class AlunosComponent implements OnInit {
 
   ];
 
+  alunoSelect(aluno: any) {
+    this.alunoSelecionado = aluno.nome;
+  }
 
+  voltar() {
+    this.alunoSelecionado = '';
+  }
   constructor() { }
 
   ngOnInit() {
