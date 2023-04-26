@@ -1,8 +1,25 @@
 
 <div *ngIf="professorSelecionado">
-  <app-titulo [titulo]="'Professor:' + professorSelecionado"></app-titulo>
+  <div class="d-flex header mt-2">
+    <div>
+      <app-titulo [titulo]="'Professor: ' + professorSelecionado"></app-titulo>
+    </div>
 
-<button  class="btn btn-default" (click)="voltar()">Voltar</button>
+    <div class="mt-2">
+      <button class="btn btn-warning" (click)="voltar()">Lista de Professores</button>
+    </div>
+  </div>
+  
+  <form>
+    <div class="form-group mt-2">
+      <label for="formGroupExampleInput">Nome</label>
+      <input type="text" class="form-control">
+    </div>
+    <div class="form-group mt-2">
+      <label for="formGroupExampleInput2">Disciplina</label>
+      <input type="text" class="form-control">
+    </div>
+  </form>
 </div>
 
 <div *ngIf="!professorSelecionado">
