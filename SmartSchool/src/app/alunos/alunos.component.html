@@ -2,7 +2,7 @@
 
   <div class="d-flex header mt-2">
     <div>
-      <app-titulo [titulo]="'Aluno: ' + alunoSelecionado"></app-titulo>
+      <app-titulo [titulo]="'Aluno: ' + alunoSelecionado.id"></app-titulo>
     </div>
 
     <div class="mt-2">
@@ -13,15 +13,15 @@
   <form>
     <div class="form-group mt-2">
       <label for="formGroupExampleInput">Nome</label>
-      <input type="text" class="form-control">
+      <input type="text" value="{{alunoSelecionado.nome}}" class="form-control">
     </div>
     <div class="form-group mt-2">
       <label for="formGroupExampleInput2">Sobrenome</label>
-      <input type="text" class="form-control">
+      <input type="text" value="{{alunoSelecionado.sobrenome}}" class="form-control">
     </div>
     <div class="form-group mt-2">
       <label for="formGroupExampleInput3">Telefone</label>
-      <input type="text" class="form-control">
+      <input type="text" value="{{alunoSelecionado.telefone}}"  class="form-control">
     </div>
   </form>
   

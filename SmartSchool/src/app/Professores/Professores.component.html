@@ -2,7 +2,7 @@
 <div *ngIf="professorSelecionado">
   <div class="d-flex header mt-2">
     <div>
-      <app-titulo [titulo]="'Professor: ' + professorSelecionado"></app-titulo>
+      <app-titulo [titulo]="'Professor: ' + professorSelecionado.id"></app-titulo>
     </div>
 
     <div class="mt-2">
@@ -13,11 +13,11 @@
   <form>
     <div class="form-group mt-2">
       <label for="formGroupExampleInput">Nome</label>
-      <input type="text" class="form-control">
+      <input type="text" value="{{professorSelecionado.nome}}" class="form-control">
     </div>
     <div class="form-group mt-2">
       <label for="formGroupExampleInput2">Disciplina</label>
-      <input type="text" class="form-control">
+      <input type="text" value="{{professorSelecionado.disciplina}}" class="form-control">
     </div>
   </form>
 </div>
