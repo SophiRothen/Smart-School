@@ -1,45 +1,50 @@
-<div *ngIf="alunoSelecionado">
-
-  <div class="d-flex header mt-2">
-    <div>
-      <app-titulo [titulo]="'Aluno: ' + alunoSelecionado.id"></app-titulo>
+<div class="row">
+  
+  <div class="col-sm-6" *ngIf="alunoSelecionado">  
+    <div class="d-flex header mt-2">
+      <div>
+        <app-titulo [titulo]="'Cod: ' + alunoSelecionado.id"></app-titulo>
+      </div>
+      
+      <div class="mt-2">
+        <button class="btn btn-outline-danger" (click)="voltar()">Fechar</button>
+      </div>
     </div>
-
-    <div class="mt-2">
-      <button class="btn btn-warning" (click)="voltar()">Lista de Estudantes</button>
-    </div>
+    
+    <form [formGroup]="alunoForm" (submit)="alunoSubmit()">
+      <div class="form-group mt-2">
+        <label for="formGroupExampleInput">Nome</label>
+        <input type="text" formControlName="nome" class="form-control">
+      </div>
+      <div class="form-group mt-2">
+        <label for="formGroupExampleInput2">Sobrenome</label>
+        <input type="text" formControlName="sobrenome" class="form-control">
+      </div>
+      <div class="form-group mt-2">
+        <label for="formGroupExampleInput3">Telefone</label>
+        <input type="text" formControlName="telefone" class="form-control">
+      </div>
+      <div class="form-group">
+        <hr>
+        <button class="btn btn-success" [disabled]="!alunoForm.valid">Enviar</button>
+      </div>
+    </form>
+    
   </div>
   
-  <form>
-    <div class="form-group mt-2">
-      <label for="formGroupExampleInput">Nome</label>
-      <input type="text" value="{{alunoSelecionado.nome}}" class="form-control">
-    </div>
-    <div class="form-group mt-2">
-      <label for="formGroupExampleInput2">Sobrenome</label>
-      <input type="text" value="{{alunoSelecionado.sobrenome}}" class="form-control">
-    </div>
-    <div class="form-group mt-2">
-      <label for="formGroupExampleInput3">Telefone</label>
-      <input type="text" value="{{alunoSelecionado.telefone}}"  class="form-control">
-    </div>
-  </form>
-  
-</div>
-
-<div *ngIf="!alunoSelecionado">
-  <app-titulo [titulo]="titulo"></app-titulo>
-  <table class="table table-hover">
-    <thead class="thead-light">
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Nome</th>
-        <th scope="col">Sobrenome</th>
-        <th scope="col">Telefone</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let aluno of alunos" 
+  <div [ngClass]="{'col-sm-12': !alunoSelecionado, 'col-sm-6': alunoSelecionado}" >
+    <app-titulo [titulo]="titulo"></app-titulo>
+    <table class="table table-hover">
+      <thead class="thead-light">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nome</th>
+          <th scope="col">Sobrenome</th>
+          <th scope="col">Telefone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let aluno of alunos" 
         style="cursor: pointer;" (click)="alunoSelect(aluno)">
         <th scope="row">{{aluno.id}}</th>
         <td>{{aluno.nome}}</td>
@@ -48,4 +53,6 @@
       </tr>   
     </tbody>
   </table>
+  </div>
+
 </div>
