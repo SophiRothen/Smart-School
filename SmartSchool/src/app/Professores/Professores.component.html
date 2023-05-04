@@ -1,45 +1,73 @@
+<div class="row">
 
-<div *ngIf="professorSelecionado">
-  <div class="d-flex header mt-2">
-    <div>
-      <app-titulo [titulo]="'Professor: ' + professorSelecionado.id"></app-titulo>
+  <div class="col-sm-6" *ngIf="professorSelecionado">
+    <div class="d-flex header mt-2">
+      <div>
+        <app-titulo [titulo]="'Cod: ' + professorSelecionado.id"></app-titulo>
+      </div>
+  
+      <div class="mt-2">
+        <button class="btn btn-outline-danger" (click)="voltar()">Fechar</button>
+      </div>
     </div>
-
-    <div class="mt-2">
-      <button class="btn btn-warning" (click)="voltar()">Lista de Professores</button>
-    </div>
+    
+    <form [formGroup]="professorForm" (submit)="professorSubmit()" >
+      <div class="form-group mt-2">
+        <label for="formGroupExampleInput">Nome</label>
+        <input type="text" formControlName="nome" class="form-control">
+      </div>
+      <div class="form-group mt-2">
+        <label for="formGroupExampleInput2">Disciplina</label>
+        <input type="text" formControlName="disciplina" class="form-control">
+      </div>
+      <div class="form-group">
+        <hr>
+        <button class="btn btn-success" [disabled]="!professorForm.valid">Enviar</button>
+      </div> 
+    </form>
   </div>
   
-  <form>
-    <div class="form-group mt-2">
-      <label for="formGroupExampleInput">Nome</label>
-      <input type="text" value="{{professorSelecionado.nome}}" class="form-control">
-    </div>
-    <div class="form-group mt-2">
-      <label for="formGroupExampleInput2">Disciplina</label>
-      <input type="text" value="{{professorSelecionado.disciplina}}" class="form-control">
-    </div>
-  </form>
+  <div [ngClass]="{'col-sm-12': !professorSelecionado, 'col-sm-6': professorSelecionado}">
+    <app-titulo [titulo]="titulo"></app-titulo>
+    <table class="table table-hover">
+      <thead class="thead-light">
+        <tr>
+          <th>Visualizar</th>
+          <th scope="col">#</th>
+          <th scope="col">Nome</th>
+          <th scope="col">Disciplina</th>
+          <th scope="col">Opções</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let prof of professores">
+          <td>
+            <button (click)="professorSelect(prof)" class="text-dark btn btn-sm btn-outline-warning">Detalhes</button>
+          </td>
+          <th scope="row">{{prof.id}}</th>
+          <td>{{prof.nome}}</td>
+          <td>{{prof.disciplina}}</td>
+          <td>
+            <div class="btn-group">
+              <button (click)="openModal(template)" class="btn btn-sm btn-primary">alunos</button>
+            </div>
+          </td>
+        </tr>   
+      </tbody>
+    </table>
+  </div>
+
 </div>
 
-<div *ngIf="!professorSelecionado">
-  <app-titulo [titulo]="titulo"></app-titulo>
-  <table class="table table-hover">
-    <thead class="thead-light">
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Nome</th>
-        <th scope="col">Disciplina</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let prof of professores"
-      style="cursor: pointer;" (click)="professorSelect(prof)">
-        <th scope="row">{{prof.id}}</th>
-        <td>{{prof.nome}}</td>
-        <td>{{prof.disciplina}}</td>
-      </tr>   
-    </tbody>
-  </table>
-</div>
 
+<ng-template #template>
+  <div class="modal-body">
+    <app-alunos></app-alunos>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn pull-right" aria-label="Close" 
+    (click)="modalRef.hide()">
+      FECHAR
+    </button>
+  </div>
+</ng-template>
